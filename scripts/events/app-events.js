@@ -1,5 +1,7 @@
 import { exportAppData, importAppData, saveAppData } from "../actions/storage-actions.js";
+import { getScenarioCandidates } from "../actions/scenario-actions.js";
 import { addMemoToVisit, addVisitForStationDate, deleteVisitById, getLocalDate } from "../actions/visit-actions.js";
+import { walkScenarios } from "../data/walk-scenarios.js";
 
 export function registerAppEvents(appState, renderScreen, showMessage) {
   document.addEventListener("click", (event) => {
@@ -12,11 +14,30 @@ export function registerAppEvents(appState, renderScreen, showMessage) {
     const navigationButton = event.target.closest("[data-screen]");
     if (navigationButton) renderScreen(navigationButton.dataset.screen);
 
+    const scenarioButton = event.target.closest("[data-scenario-id]");
+    if (scenarioButton) {
+      const scenario = walkScenarios.find((candidate) => candidate.id === scenarioButton.dataset.scenarioId);
+      appState.selectedScenarioId = scenario.id;
+      appState.candidates = getScenarioCandidates(appState.stations, scenario);
+      renderScreen("candidates");
+    }
+
+    const candidateButton = event.target.closest("[data-station-name]");
+    if (candidateButton) {
+      appState.displayedStationName = candidateButton.dataset.stationName;
+      appState.detailOrigin = "candidates";
+      renderScreen("detail");
+    }
+
     if (event.target.closest("#draw-station")) {
       const previousStationName = appState.displayedStationName;
       const candidates = appState.stations.filter((station) => station.name !== previousStationName);
-      appState.displayedStationName = candidates[Math.floor(Math.random() * candidates.length)].name;
-      renderScreen("home");
+      const selectedStation = candidates[Math.floor(Math.random() * candidates.length)];
+      const matchingScenarios = walkScenarios.filter((scenario) => selectedStation.themes.some((theme) => scenario.themes.includes(theme)));
+      appState.displayedStationName = selectedStation.name;
+      appState.selectedScenarioId = matchingScenarios[Math.floor(Math.random() * matchingScenarios.length)].id;
+      appState.detailOrigin = "home";
+      renderScreen("detail");
     }
 
     if (event.target.closest("#record-visit")) {

@@ -517,3 +517,585 @@ h1 {
     transform: translateX(-50%);
   }
 }
+
+.home-screen {
+  padding-top: 17px;
+}
+
+.home-introduction {
+  position: relative;
+  height: 278px;
+  margin: -17px -20px 0;
+  overflow: hidden;
+  background: url("https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000&q=85") center/cover;
+  color: white;
+}
+
+.home-introduction-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(21, 42, 47, .12), rgba(15, 49, 44, .61));
+}
+
+.home-introduction>div {
+  position: absolute;
+  right: 24px;
+  bottom: 28px;
+  left: 24px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .34);
+}
+
+.home-introduction p {
+  margin: 0;
+  font-family: "Noto Serif JP", serif;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.home-introduction small {
+  display: block;
+  margin-top: 7px;
+  font-family: "Noto Serif JP", serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.scenario-section {
+  padding-top: 26px;
+}
+
+.scenario-list {
+  display: grid;
+  gap: 10px;
+}
+
+.scenario-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 102px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 14px;
+  color: white;
+  text-align: left;
+  box-shadow: 0 6px 14px rgba(42, 74, 70, .13);
+}
+
+.scenario-card-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10, 39, 35, .76), rgba(10, 39, 35, .12));
+}
+
+.scenario-card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.scenario-card-content>span:last-child {
+  display: grid;
+  gap: 4px;
+}
+
+.scenario-card strong {
+  font-family: "Noto Serif JP", serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.scenario-card small {
+  font-size: 11px;
+}
+
+.scenario-card b {
+  position: relative;
+  z-index: 1;
+  font-size: 31px;
+  font-weight: 400;
+}
+
+.scenario-icon {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.scenario-nature {
+  background: url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=85") center/cover;
+}
+
+.scenario-city {
+  background: url("https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=900&q=85") center/cover;
+}
+
+.scenario-town {
+  background: url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=900&q=85") center/cover;
+}
+
+.scenario-food {
+  background: url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=900&q=85") center/cover;
+}
+
+.scenario-card:active,
+.candidate-card:active {
+  transform: scale(.985);
+}
+
+.station-gacha-card {
+  position: relative;
+  height: 206px;
+  margin: 18px 0 14px;
+  overflow: hidden;
+  border-radius: 17px;
+  background: #214f52;
+  box-shadow: 0 12px 24px rgba(35, 88, 84, .24);
+}
+
+.station-gacha-photo {
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=85") center/cover;
+  transform: scale(1.04);
+}
+
+.station-gacha-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(29, 91, 82, .93), rgba(38, 95, 109, .45)), radial-gradient(circle at 83% 16%, rgba(255, 225, 167, .65) 0 2px, transparent 3px), radial-gradient(circle at 80% 18%, rgba(255, 225, 167, .45) 0 1px, transparent 2px);
+}
+
+.station-gacha-content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 6px 4px;
+  align-content: center;
+  padding: 20px;
+  color: white;
+}
+
+.station-gacha-token {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .75);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
+  font-size: 20px;
+  box-shadow: 0 0 0 7px rgba(255, 255, 255, .08);
+}
+
+.station-gacha-content strong {
+  align-self: center;
+  font-family: "Noto Serif JP", serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.station-gacha-content button {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .17);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  backdrop-filter: blur(9px);
+}
+
+.station-gacha-content button:active {
+  background: rgba(255, 255, 255, .3);
+}
+
+.station-gacha-content button b {
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.back-button {
+  margin: -9px 0 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.candidate-list {
+  display: grid;
+  gap: 10px;
+}
+
+.candidate-card {
+  display: flex;
+  width: 100%;
+  min-height: 103px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
+  color: var(--ink);
+  text-align: left;
+  box-shadow: 0 5px 14px rgba(45, 71, 69, .05);
+}
+
+.candidate-card span {
+  display: grid;
+  gap: 6px;
+}
+
+.candidate-card strong {
+  font-family: "Noto Serif JP", serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.candidate-card small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.candidate-card b {
+  color: var(--green);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.full-width-button {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.detail-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.scenario-screen {
+  margin: -17px -20px 0;
+  padding-top: 0;
+  background: var(--paper);
+}
+
+.scenario-hero,
+.detail-hero {
+  position: relative;
+  overflow: hidden;
+  color: white;
+  background-position: center;
+  background-size: cover;
+}
+
+.scenario-hero {
+  height: 286px;
+}
+
+.detail-hero {
+  height: 348px;
+}
+
+.scenario-hero-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(9, 39, 31, .15), rgba(8, 47, 35, .79));
+}
+
+.scenario-screen.scenario-city .scenario-hero-veil,
+.scenario-screen.scenario-city .station-veil {
+  background: linear-gradient(180deg, rgba(18, 39, 63, .12), rgba(15, 38, 69, .81));
+}
+
+.scenario-screen.scenario-town .scenario-hero-veil,
+.scenario-screen.scenario-town .station-veil {
+  background: linear-gradient(180deg, rgba(67, 38, 24, .12), rgba(70, 39, 23, .8));
+}
+
+.scenario-screen.scenario-food .scenario-hero-veil,
+.scenario-screen.scenario-food .station-veil {
+  background: linear-gradient(180deg, rgba(70, 37, 20, .12), rgba(73, 35, 20, .82));
+}
+
+.hero-back-button {
+  position: absolute;
+  top: 19px;
+  left: 20px;
+  z-index: 1;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .14);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+
+.scenario-hero-copy {
+  position: absolute;
+  right: 24px;
+  bottom: 29px;
+  left: 24px;
+}
+
+.scenario-hero-copy p {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+}
+
+.scenario-hero-copy h1 {
+  margin: 8px 0;
+  font-size: 33px;
+  color: white;
+}
+
+.scenario-hero-copy span {
+  font-size: 12px;
+}
+
+.candidate-content {
+  padding: 25px 20px 110px;
+}
+
+.candidate-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.candidate-heading p,
+.walk-hints>p {
+  margin: 0;
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+}
+
+.candidate-heading h2 {
+  margin: 5px 0 0;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.candidate-heading>span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.candidate-list {
+  display: grid;
+  gap: 10px;
+}
+
+.candidate-card {
+  display: grid;
+  grid-template-columns: 29px 1fr 18px;
+  gap: 9px;
+  min-height: 116px;
+  align-items: start;
+  padding: 16px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
+  color: var(--ink);
+  text-align: left;
+  box-shadow: 0 5px 13px rgba(48, 75, 63, .05);
+}
+
+.candidate-number {
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.candidate-card strong {
+  display: block;
+  font-family: "Noto Serif JP", serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.candidate-card small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.candidate-card em {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--green);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.candidate-card b {
+  align-self: center;
+  color: var(--green);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.full-width-button {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.detail-content {
+  padding: 0 21px 112px;
+}
+
+.theme-pill {
+  position: relative;
+  display: inline-block;
+  margin-top: -17px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: var(--green);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.scenario-city .theme-pill,
+.scenario-city .detail-record-button {
+  background: #527ba8;
+}
+
+.scenario-town .theme-pill,
+.scenario-town .detail-record-button {
+  background: #aa7756;
+}
+
+.scenario-food .theme-pill,
+.scenario-food .detail-record-button {
+  background: #ae7156;
+}
+
+.detail-content h2 {
+  margin: 21px 0 13px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.55;
+}
+
+.detail-lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.walk-hints {
+  display: grid;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.walk-hints article {
+  position: relative;
+  display: flex;
+  gap: 13px;
+  min-height: 67px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 11px;
+  background: #edf5ee;
+}
+
+.walk-hints article>span {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  place-items: center;
+  color: var(--green);
+  font-size: 19px;
+}
+
+.walk-hints strong,
+.walk-hints small {
+  display: block;
+}
+
+.walk-hints strong {
+  font-size: 12px;
+}
+
+.walk-hints small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.detail-record-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding: 17px 19px;
+  font-size: 14px;
+}
+
+.detail-record-button span {
+  font-size: 20px;
+}
+
+.scenario-nature .scenario-hero,
+.scenario-nature .detail-hero,
+.station-card.scenario-nature {
+  background-image: url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=85");
+}
+
+.scenario-city .scenario-hero,
+.scenario-city .detail-hero,
+.station-card.scenario-city {
+  background-image: url("https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=1200&q=85");
+}
+
+.scenario-town .scenario-hero,
+.scenario-town .detail-hero,
+.station-card.scenario-town {
+  background-image: url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=85");
+}
+
+.scenario-food .scenario-hero,
+.scenario-food .detail-hero,
+.station-card.scenario-food {
+  background-image: url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1200&q=85");
+}

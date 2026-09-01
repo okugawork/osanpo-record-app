@@ -1,4 +1,5 @@
 import { stations } from "../data/station-data.js";
+import { walkScenarios } from "../data/walk-scenarios.js";
 import { getStationVisitCount } from "./visit-actions.js";
 
 export function findStation(stationName) {
@@ -13,8 +14,20 @@ function stationOptions(selectedName) {
   return stations.map((station) => `<option value="${station.name}" ${station.name === selectedName ? "selected" : ""}>${station.name}駅</option>`).join("");
 }
 
-function stationCard(station) {
-  return `<article class="station-card"><div class="station-veil"></div><div class="station-content"><p class="station-kicker">TODAY'S WALK</p><h2 class="station-name">${station.name}駅</h2><p class="station-copy">${station.description}</p><div class="tag-list">${station.themes.map((theme) => `<span class="tag">${theme}</span>`).join("")}</div></div><p class="station-meta"><span class="line-mark"></span>${station.lines}</p></article>`;
+function stationCard(station, scenario) {
+  return `<article class="station-card ${scenario?.imageClass ?? "scenario-town"}"><div class="station-veil"></div><div class="station-content"><p class="station-kicker">STATION WALK GUIDE</p><h2 class="station-name">${station.name}駅</h2><p class="station-copy">${station.description}</p><div class="tag-list">${station.themes.map((theme) => `<span class="tag">${theme}</span>`).join("")}</div></div><p class="station-meta"><span class="line-mark"></span>${station.lines}</p></article>`;
+}
+
+function scenarioCard(scenario) {
+  return `<button class="scenario-card ${scenario.imageClass}" data-scenario-id="${scenario.id}" type="button"><span class="scenario-card-veil"></span><span class="scenario-card-content"><span class="scenario-icon" aria-hidden="true">${scenario.id === "nature" ? "♧" : scenario.id === "future-city" ? "▥" : scenario.id === "town-walk" ? "⌁" : "☕"}</span><span><strong>${scenario.title}</strong><small>${scenario.description}</small></span></span><b aria-hidden="true">›</b></button>`;
+}
+
+function stationGachaCard() {
+  return `<article class="station-gacha-card"><div class="station-gacha-photo"></div><div class="station-gacha-veil"></div><div class="station-gacha-content"><span class="station-gacha-token" aria-hidden="true">✦</span><strong>知らない駅へ、ふらり。</strong><button id="draw-station" type="button">駅ガチャを回す <b aria-hidden="true">→</b></button></div></article>`;
+}
+
+function candidateCard(station, index) {
+  return `<button class="candidate-card" data-station-name="${station.name}" type="button"><span class="candidate-number">0${index + 1}</span><span><strong>${station.name}駅</strong><small>${station.description}</small><em>${station.themes.slice(0, 2).join("　")}</em></span><b aria-hidden="true">›</b></button>`;
 }
 
 function formatDate(dateText) {
@@ -30,8 +43,17 @@ function visitCard(visit, visits, includeDelete = false) {
   return `<article class="visit-card"><div class="card-header"><div><h3>${visit.stationName}駅</h3><p class="visit-meta">${formatDate(visit.visitDate)} ・ ${visitNumber}回目 ・ +1ポイント</p></div>${includeDelete ? `<button class="danger-button" data-delete-visit-id="${visit.id}" type="button">削除</button>` : ""}</div><ul class="memo-list">${visit.memos.map((memo) => `<li class="memo-item"><span class="memo-time">${formatTime(memo.createdAt)}</span>${memo.text}</li>`).join("")}</ul></article>`;
 }
 
-export function renderHomeScreen(station) {
-  return `<section class="screen home-screen"><p class="section-label">TODAY'S RECOMMENDATION</p><h1>今日は、こんな散歩を。</h1><p class="lead">駅から始まる、小さな発見。</p>${stationCard(station)}<div class="home-actions"><button class="secondary-button" data-screen="record" type="button">この駅を記録する</button><button class="primary-button draw-button" id="draw-station" type="button">別の駅を引く <span aria-hidden="true">→</span></button></div><p class="hint">気分が変わったら、何度でも引き直せます</p></section>`;
+export function renderHomeScreen() {
+  return `<section class="screen home-screen"><section class="home-introduction"><div class="home-introduction-veil"></div><div><p>歩く、感じる、つながる。</p><small>東京を、あなたのペースで。</small></div></section><section class="scenario-section" aria-labelledby="scenario-heading"><p class="section-label">TODAY'S WALK</p><h1 id="scenario-heading">今日は、どんな気分？</h1><p class="lead">シチュエーションを選ぶと、散歩に合う駅を紹介します。</p>${stationGachaCard()}<div class="scenario-list">${walkScenarios.map(scenarioCard).join("")}</div></section></section>`;
+}
+
+export function renderCandidateScreen(scenario, candidates) {
+  return `<section class="screen scenario-screen ${scenario.imageClass}"><section class="scenario-hero"><div class="scenario-hero-veil"></div><button class="hero-back-button" data-screen="home" type="button">‹ 戻る</button><div class="scenario-hero-copy"><p>WALKING SCENE</p><h1>${scenario.title}</h1><span>${scenario.description}</span></div></section><section class="candidate-content"><div class="candidate-heading"><div><p>SELECT A STATION</p><h2>今日の候補駅</h2></div><span>${candidates.length} spots</span></div><p class="lead">気になる駅を選ぶと、散歩のヒントを見られます。</p><section class="candidate-list" aria-label="おすすめ駅">${candidates.map(candidateCard).join("")}</section><button class="secondary-button full-width-button" data-scenario-id="${scenario.id}" type="button">↻ 別の候補を見る</button></section></section>`;
+}
+
+export function renderStationDetailScreen(station, scenario, originScreen = "home") {
+  const returnLabel = originScreen === "home" ? "‹ ホームへ" : "‹ 候補駅へ";
+  return `<section class="screen scenario-screen ${scenario.imageClass}"><section class="detail-hero"><div class="scenario-hero-veil"></div><button class="hero-back-button" data-screen="${originScreen}" type="button">${returnLabel}</button><div class="scenario-hero-copy"><p>STATION WALK GUIDE</p><h1>${station.name}駅</h1><span>${station.lines}</span></div></section><section class="detail-content"><span class="theme-pill">${scenario.title}</span><h2>${scenario.guideTitle.replace("\n", "<br>")}</h2><p class="detail-lead">${scenario.guideDescription}</p><section class="walk-hints"><p>WALKING HINTS</p>${scenario.hints.map(([icon, title, description]) => `<article><span>${icon}</span><div><strong>${title}</strong><small>${description}</small></div></article>`).join("")}</section><button class="primary-button detail-record-button" data-screen="record" type="button">この駅で散歩を始める <span aria-hidden="true">→</span></button></section></section>`;
 }
 
 export function renderRecordScreen(selectedStationName, visitDate) {
