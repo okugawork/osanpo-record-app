@@ -3,7 +3,11 @@ import { addMemoToVisit, addVisitForStationDate, deleteVisitById, getLocalDate }
 
 export function registerAppEvents(appState, renderScreen, showMessage) {
   document.addEventListener("click", (event) => {
-    if (event.target.closest("#start-walk")) renderScreen("home");
+    if (event.target.closest("#start-walk")) {
+      document.body.classList.add("is-opening");
+      renderScreen("home");
+      setTimeout(() => document.body.classList.remove("is-opening"), 700);
+    }
 
     const navigationButton = event.target.closest("[data-screen]");
     if (navigationButton) renderScreen(navigationButton.dataset.screen);
