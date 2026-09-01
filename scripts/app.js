@@ -1,7 +1,7 @@
 import { stations } from "./data/station-data.js";
 import { loadAppData } from "./actions/storage-actions.js";
 import { getLocalDate } from "./actions/visit-actions.js";
-import { findStation, renderHistoryScreen, renderHomeScreen, renderPointsScreen, renderRecordScreen, updateNavigation, updateTotalPoints } from "./actions/view-actions.js";
+import { findStation, renderHistoryScreen, renderHomeScreen, renderLaunchScreen, renderPointsScreen, renderRecordScreen, updateNavigation, updateTotalPoints } from "./actions/view-actions.js";
 import { registerAppEvents } from "./events/app-events.js";
 
 const appState = { data: loadAppData(), displayedStationName: "", stations };
@@ -18,13 +18,16 @@ function getTodayRecommendedStation() {
 
 function renderScreen(screenName = "home") {
   const screenContainer = document.querySelector("#screen-container");
+  const isLaunchScreen = screenName === "launch";
+  document.body.classList.toggle("is-launch-screen", isLaunchScreen);
+  if (isLaunchScreen) screenContainer.innerHTML = renderLaunchScreen();
   if (screenName === "home") screenContainer.innerHTML = renderHomeScreen(findStation(appState.displayedStationName));
   if (screenName === "record") screenContainer.innerHTML = renderRecordScreen(appState.displayedStationName, getLocalDate());
   if (screenName === "history") screenContainer.innerHTML = renderHistoryScreen(appState.data.visits);
   if (screenName === "points") screenContainer.innerHTML = renderPointsScreen(appState.data.visits);
   updateTotalPoints(appState.data.visits);
   updateNavigation(screenName);
-  history.replaceState(null, "", `#${screenName}`);
+  history.replaceState(null, "", isLaunchScreen ? "./" : `#${screenName}`);
 }
 
 function showMessage(message) {
@@ -34,4 +37,4 @@ function showMessage(message) {
 
 appState.displayedStationName = getTodayRecommendedStation();
 registerAppEvents(appState, renderScreen, showMessage);
-renderScreen(location.hash.slice(1) || "home");
+renderScreen("launch");

@@ -5,6 +5,10 @@ export function findStation(stationName) {
   return stations.find((station) => station.name === stationName);
 }
 
+export function renderLaunchScreen() {
+  return `<section class="launch-screen" aria-labelledby="launch-title"><div class="launch-grid"></div><div class="launch-glow launch-glow-one"></div><div class="launch-glow launch-glow-two"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="launch-content"><p class="launch-kicker">URBAN WALK SYSTEM / TOKYO</p><div class="launch-mark" aria-hidden="true"><span></span><span></span><span></span></div><h1 id="launch-title">OSANPO<br><em>RECORD</em></h1><p class="launch-copy">まだ知らない街へ。<br>今日の一駅から、歩きはじめよう。</p><button class="launch-button" id="start-walk" type="button"><span>お散歩を開始</span><b aria-hidden="true">→</b></button><p class="launch-status"><i></i> READY TO DEPART</p></div></section>`;
+}
+
 function stationOptions(selectedName) {
   return stations.map((station) => `<option value="${station.name}" ${station.name === selectedName ? "selected" : ""}>${station.name}駅</option>`).join("");
 }
@@ -27,7 +31,7 @@ function visitCard(visit, visits, includeDelete = false) {
 }
 
 export function renderHomeScreen(station) {
-  return `<section class="screen"><p class="section-label">● 今日おすすめの駅</p><h1>どこへ行こう?</h1><p class="lead">ふらりと選んだ駅から、いつもの街を少し広げよう。</p>${stationCard(station)}<button class="primary-button draw-button" id="draw-station" type="button">駅を引く</button><p class="hint">気分が変わったら、何度でも引き直せます</p></section>`;
+  return `<section class="screen"><p class="section-label">● TODAY'S RECOMMENDATION</p><h1>どこへ行こう?</h1><p class="lead">ふらりと選んだ駅から、いつもの街を少し広げよう。</p>${stationCard(station)}<button class="primary-button draw-button" id="draw-station" type="button">駅を引く <span aria-hidden="true">→</span></button><p class="hint">気分が変わったら、何度でも引き直せます</p></section>`;
 }
 
 export function renderRecordScreen(selectedStationName, visitDate) {
